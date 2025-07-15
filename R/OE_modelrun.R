@@ -1,5 +1,5 @@
 
-#' OE_modelrun
+#' OE_run
 #'
 #'Runs the O:E model and outputs scores.
 #'
@@ -10,7 +10,7 @@
 #' @export
 #'
 
-OE_modelrun <- function(df_bugs,
+OE_run <- function(df_bugs,
                         subsample_seed = 16412730){
   
   # 

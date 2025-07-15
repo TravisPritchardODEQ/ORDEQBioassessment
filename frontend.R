@@ -47,7 +47,7 @@
 
 
 
-bug_tax_data <- ORDEQBioassessment::fetch_data()
+bug_tax_data <- ORDEQBioassessment::fetch_bug_data()
 
 
 bug_tax_data_filtered <- bug_tax_data |>
@@ -122,7 +122,7 @@ if (nrow(no_comid) > 0) {
   warning("Missing COMIDs. Please address before continuing")
 }
 
-OE_results <- OE_modelrun(df_bugs = bug_tax_data_filtered)
+OE_results <- ORDEQBioassessment::OE_run(df_bugs = bug_tax_data_filtered)
 
 OE_scores <- OE_results$OE_Scores
 

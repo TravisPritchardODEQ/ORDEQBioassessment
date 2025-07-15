@@ -2,9 +2,9 @@
 
 export(BCG_run)
 export(MMI_run)
-export(OE_modelrun)
+export(OE_run)
 export(calculate_metrics)
-export(fetch_data)
+export(fetch_bug_data)
 export(get_NHD_info)
 export(get_streamcat)
 export(model.predict.RanFor.4.2)

@@ -1,4 +1,4 @@
-#' fetch_data
+#' fetch_bug_data
 #'
 #' @param startdate Startdate for datapull
 #' @param enddate Enddate for datapull
@@ -10,7 +10,7 @@
 
 
 
-fetch_data <- function(startdate = NULL,
+fetch_bug_data <- function(startdate = NULL,
                        enddate = NULL){
   
   

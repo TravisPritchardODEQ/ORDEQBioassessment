@@ -1,6 +1,4 @@
-
-<img width="1024" height="1024" alt="detective mayfly" src="https://github.com/user-attachments/assets/9cd05b11-239a-4ced-9edc-6a5f303b3b16" />
-
+<img src="https://github.com/user-attachments/assets/9cd05b11-239a-4ced-9edc-6a5f303b3b16" alt="detective mayfly" width="1024" height="1024"/>
 
 # ORDEQBioassessment
 
@@ -26,3 +24,5 @@ Download the [frontend file](https://github.com/TravisPritchardODEQ/ORDEQBioasse
 -   Add option to limit running the code to only sites that do not yet have calculated metrics
 
 -   Create AWQMS import files
+
+-   Get final list of metrics to upload to AWQMS

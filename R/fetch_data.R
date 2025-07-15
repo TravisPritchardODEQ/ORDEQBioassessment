@@ -42,7 +42,7 @@ fetch_bug_data <- function(startdate = NULL,
 
   
   
-  taxonomy_leppo_select <- taxonomy_leppo |> 
+  taxonomy_leppo_select <- ORDEQBioassessment::taxonomy_leppo |> 
     dplyr::select(Taxon_orig,OTU_MTTI, OTU_BSTI, OTU_MetricCalc, OTU_BCG_MariNW) |> 
     dplyr::rename(Taxon = Taxon_orig)
   

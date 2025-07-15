@@ -1,4 +1,6 @@
-![](images/detective mayfly.png){width="343"}
+
+<img width="1024" height="1024" alt="detective mayfly" src="https://github.com/user-attachments/assets/9cd05b11-239a-4ced-9edc-6a5f303b3b16" />
+
 
 # ORDEQBioassessment
 

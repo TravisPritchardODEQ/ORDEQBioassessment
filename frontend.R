@@ -82,8 +82,32 @@ missing_streamcat <- OE_results$missing_streamcat
 
 # MMI -------------------------------------------------------------------------------------------------------------
 
-MMI_results <- MMI_run(df_bugs = bug_tax_data_filtered, df_sample = sample_info)
+MMI_results <- ORDEQBioassessment::MMI_run(
+  df_bugs = bug_tax_data_filtered,
+  df_sample = sample_info
+)
 
 MMI_scores <- MMI_results$MMI_result
 
 MMI_metrics <- MMI_results$MMI_metrics
+
+
+## Calculate Metrics ----------------------------------------------------------------------------------------------
+
+BCG_metric_list <- ORDEQBioassessment::calculate_metrics(bug_tax_data_filtered)
+
+BCG_metrics <- BCG_metric_list$Metrics
+BCG_Metric_taxa_attributes <- BCG_metric_list$metric_taxa_attribute
+
+
+## Run BCG --------------------------------------------------------------------------------------------------------
+
+BCG <- ORDEQBioassessment::BCG_run(BCG_metrics)
+
+BCG_results <- BCG$Levels.Flags
+BCG_Metric.Membership <- BCG$Metric.Membership
+BCG_Level.Membership <- BCG$Level.Membership
+
+
+BCG_sample <- sample_info |>
+  left_join(BCG_results, by = c('act_id' = 'SampleID'))

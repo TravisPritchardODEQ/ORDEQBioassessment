@@ -45,6 +45,7 @@
 
 
 library(ORDEQBioassessment)
+library(tidyverse)
 
 
 bug_tax_data <- ORDEQBioassessment::fetch_bug_data()

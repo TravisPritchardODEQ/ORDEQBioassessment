@@ -57,6 +57,16 @@
 
 model.predict.RanFor.4.2<-function(bugcal.pa,grps.final,preds.final,ranfor.mod, prednew,bugnew,Pc,Cal.OOB=FALSE) {;
   
+  library(randomForest)
+  #Testing
+  # ranfor.mod=model.final
+  # prednew=preds_raw.bugs_mod
+  # bugnew=bugs.mat_raw.bugs_matching
+  # Pc=0.5
+  # Cal.OOB=FALSE
+  
+  
+  
   #first convert bug matrix to P/A (1/0);
   temp.pa<-bugnew;
   temp.pa[temp.pa>0]<-1;

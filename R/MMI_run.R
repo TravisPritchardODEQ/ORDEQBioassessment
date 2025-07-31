@@ -321,6 +321,7 @@ MMI_run <- function(df_bugs, df_sample,
                                                            TRUE ~  pi_EPTNoHydro_resid)) %>%  
     dplyr::mutate(MMI = (pt_tv_intol_resid + nt_habitat_rheo_resid +
                            pt_ti_stenocold_cold_cool_resid+pi_EPTNoHydro_resid)  /4) |> 
+    dplyr::mutate(MMI = MMI/0.7292573) |> 
     dplyr::left_join(df_sample, by =c('SAMPLEID' = 'act_id')) |> 
     dplyr::relocate(pt_tv_intol_resid,nt_habitat_rheo_resid,pt_ti_stenocold_cold_cool_resid,pi_EPTNoHydro_resid,MMI, .after = last_col())
   

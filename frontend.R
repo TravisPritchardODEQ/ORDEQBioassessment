@@ -11,7 +11,7 @@
 #
 # Front end for running bioassessment score calculations
 #
-# Version 2.0
+# Version 3.0
 #
 # . .... . . ..  . ... ..... . .. . . .   . ..  . .;.. .. . . . .     .  . . . . . .       . .  . ... 
 # .... ...... ... .. .. . ..  . .... . ... .. ...:: . . . .  . . ... . . .  . . . . . .  .  .  . .  . 
@@ -46,7 +46,21 @@
 
 library(ORDEQBioassessment)
 library(tidyverse)
+library(randomForest)
 
+
+##############
+###Change this location
+#######################
+
+#File folder that files will be saved to
+file_save_locationx <- '//deqlead-lims/SERVERFOLDERS/AWQMS/BioMon/2025 models'
+
+
+#################################################################
+###DID YOU CONFIRM THE CORRECT LOCATION???????????????????
+#### SEE ABOVE
+##################################
 
 bug_tax_data <- ORDEQBioassessment::fetch_bug_data()
 
@@ -130,6 +144,12 @@ OE_scores <- OE_results$OE_Scores
 missing_streamcat <- OE_results$missing_streamcat
 
 
+# Generate AWQMS import templates
+# Use "BioMon Indexes_v2" import configuration
+ORDEQBioassessment::generate_import_template(OE_scores,
+                                             type = "OE",
+                                             save_location = file_save_locationx)
+
 # MMI -------------------------------------------------------------------------------------------------------------
 
 MMI_results <- ORDEQBioassessment::MMI_run(
@@ -141,13 +161,28 @@ MMI_scores <- MMI_results$MMI_result
 
 MMI_metrics <- MMI_results$MMI_metrics
 
+# Generate AWQMS import templates
+# Use "BioMon Indexes_v2" import configuration
+
+ORDEQBioassessment::generate_import_template(MMI_scores,
+                                             type = "MMI",
+                                             save_location = file_save_locationx)
+
 
 ## Calculate Metrics ----------------------------------------------------------------------------------------------
 
-BCG_metric_list <- ORDEQBioassessment::calculate_metrics(bug_tax_data_filtered)
+metric_list <- ORDEQBioassessment::calculate_metrics(bug_tax_data_filtered)
 
-BCG_metrics <- BCG_metric_list$Metrics
-BCG_Metric_taxa_attributes <- BCG_metric_list$metric_taxa_attribute
+metrics <- metric_list$Metrics |> 
+  left_join(select(sample_info,org_id,act_id,Activity_Type,Sample_Media,SampleStart_Date,
+                   Project1,MLocID, act_comments, Sample_Method, Assemblage), join_by(SAMPLEID == act_id))
+Metric_taxa_attributes <- metric_list$metric_taxa_attribute
+
+# Generate AWQMS import templates
+# Use "BioMon Metrics V2" import configuration
+ORDEQBioassessment::generate_import_template(metrics,
+                                             type = "Metrics",
+                                             save_location = file_save_locationx)
 
 
 ## Run BCG --------------------------------------------------------------------------------------------------------

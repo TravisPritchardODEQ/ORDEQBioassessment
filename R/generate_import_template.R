@@ -167,14 +167,15 @@ config <- config |>
   dplyr::mutate(act_id = stringr::str_remove(`Index ID`, "\\:[^:]*$")) |>
   dplyr::left_join(DQL, by = dplyr::join_by(act_id)) |>
   dplyr::mutate(`Data Quality Level` = DQL) |>
-  dplyr::select(-DQL, -act_id)}
-else {
+  dplyr::select(-DQL, -act_id)
+
+} else {
   
   config <- config |>
    #mutate(act_id = str_remove(`Index ID`, "\\:[^:]*$")) |>
     dplyr::left_join(DQL, by = dplyr::join_by(act_id)) |>
     dplyr::mutate(`Data Quality Level` = DQL) |>
-    dplyr::select(-DQL, -act_id)
+    dplyr::select(-DQL)
 }
 
 config_list <- split(config, f = config$org_id)

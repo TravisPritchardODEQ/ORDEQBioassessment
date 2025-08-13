@@ -67,27 +67,27 @@ bug_tax_data <- ORDEQBioassessment::fetch_bug_data()
 
 bug_tax_data_filtered <- bug_tax_data |>
   #filter(Result_Status != 'Rejected') |> ### 12/2 - LAM removed this for now - will apply later ?
-  filter(SampleStart_Date > "1997-01-01") %>% ### 12/2 - LAM modified this to 1997 -  SH used 97 and 98 data in the model builds
-  filter(
-    Sample_Method %in%
-      c(
-        'Benthic Kick - Riffle',
-        'Benthic Kick - Targeted Riffle',
-        'Benthic Kick - Transect',
-        'Benthic Kick - Mixed'
-      )
-  ) %>% # LAM added mixed for USU transect data inclusion
+  # filter(SampleStart_Date > "1997-01-01") %>% ### 12/2 - LAM modified this to 1997 -  SH used 97 and 98 data in the model builds
+  # filter(
+  #   Sample_Method %in%
+  #     c(
+  #       'Benthic Kick - Riffle',
+  #       'Benthic Kick - Targeted Riffle',
+  #       'Benthic Kick - Transect',
+  #       'Benthic Kick - Mixed'
+  #     )
+  # ) %>% # LAM added mixed for USU transect data inclusion
   filter(Char_Name == 'Count') %>%
   mutate(SampleStart_Date = lubridate::ymd(SampleStart_Date)) |>
-  mutate(month = format(SampleStart_Date, "%m")) %>%
-  filter(
-    month %in%
-      '06' |
-      month %in% '07' |
-      month %in% '08' |
-      month %in% '09' |
-      month %in% '10'
-  )
+  mutate(month = format(SampleStart_Date, "%m")) #%>%
+  # filter(
+  #   month %in%
+  #     '06' |
+  #     month %in% '07' |
+  #     month %in% '08' |
+  #     month %in% '09' |
+  #     month %in% '10'
+  # )
 
 
 sample_info <- bug_tax_data_filtered |>
@@ -175,7 +175,7 @@ metric_list <- ORDEQBioassessment::calculate_metrics(bug_tax_data_filtered)
 
 metrics <- metric_list$Metrics |> 
   left_join(select(sample_info,org_id,act_id,Activity_Type,Sample_Media,SampleStart_Date,
-                   Project1,MLocID, act_comments, Sample_Method, Assemblage), join_by(SAMPLEID == act_id))
+                   Project1,MLocID, act_comments, Sample_Method, Assemblage, EcoRegion3), join_by(SAMPLEID == act_id))
 Metric_taxa_attributes <- metric_list$metric_taxa_attribute
 
 # Generate AWQMS import templates

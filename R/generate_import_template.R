@@ -154,17 +154,11 @@ generate_import_template <- function(df, type, save_location){
   }
   # Once metric and index QC process is created, update this to reflect new process
   # For now, we are just using what was identified in model development phase
-  if(!"tot.abund_raw.bugs" %in% colnames(df)){
-    
-    df <- df |> 
-      dplyr::mutate(tot.abund_raw.bugs = ni_total) |> 
-      dplyr::rename(act_id = SAMPLEID)  
-    
-  }
   
   
+  if(type != "Metrics"){
+    
  
-  
   DQL <-  df |> 
     dplyr::mutate(SampleStart_Date = lubridate::ymd(SampleStart_Date),
                   month = format(SampleStart_Date, "%m"),
@@ -200,7 +194,7 @@ generate_import_template <- function(df, type, save_location){
                   Awqms_qualifer = ifelse(qualifer != 0, 'ALT', "")) %>% 
     dplyr::select(act_id,qualifer,qualifer_text,DQL,Awqms_qualifer)
   
-  if(type %in% c('OE', 'MMI')){
+ 
     config <- config |>
       dplyr::mutate(act_id = stringr::str_remove(`Index ID`, "\\:[^:]*$")) |>
       dplyr::left_join(DQL, by = dplyr::join_by(act_id)) |>
@@ -213,9 +207,7 @@ generate_import_template <- function(df, type, save_location){
     
     config <- config |>
       #mutate(act_id = str_remove(`Index ID`, "\\:[^:]*$")) |>
-      dplyr::left_join(DQL, by = dplyr::join_by(act_id)) |>
-      dplyr::mutate(`Data Quality Level` = DQL) |>
-      dplyr::select(-DQL)
+      dplyr::mutate(`Data Quality Level` = "") 
   }
   
   config_list <- split(config, f = config$org_id)

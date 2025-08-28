@@ -58,7 +58,7 @@ generate_import_template <- function(df, type, save_location){
       dplyr::mutate(
         `Index Score` = round(`Index Score`, 3),
         `Index ID` = dplyr::case_when(
-          `Index Type ID` == 'O/E Ratio' ~ paste0(`Index ID`, ":OE"),
+          `Index Type ID` == 'O/E Ratio' ~ paste0(`Index ID`, ":OE2"),
           `Index Type ID` == 'Bray Curtis Similarity Index' ~
             paste0(`Index ID`, ":BC")
         )

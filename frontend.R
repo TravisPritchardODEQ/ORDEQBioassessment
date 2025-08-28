@@ -161,6 +161,12 @@ MMI_scores <- MMI_results$MMI_result
 
 MMI_metrics <- MMI_results$MMI_metrics
 
+MMI_ni_total <- MMI_metrics |> 
+  select(SAMPLEID, ni_total)
+
+MMI_scores <- MMI_scores |> 
+  left_join(MMI_ni_total)
+
 # Generate AWQMS import templates
 # Use "BioMon Indexes_v2" import configuration
 

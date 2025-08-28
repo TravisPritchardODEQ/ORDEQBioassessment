@@ -20,7 +20,7 @@ generate_import_template <- function(df, type, save_location){
   # Testing -----------------------------------------------------------------
   
   
-  # df <- metrics
+  # df <- MMI_scores
   # type <-  'Metrics'
   # save_location <- 'C:/Users/tpritch/OneDrive - Oregon/R Projects/ORDEQBioassessment'
   
@@ -75,6 +75,12 @@ generate_import_template <- function(df, type, save_location){
   
   
   if (type == "MMI") {
+    
+    df <- df |> 
+      mutate(tot.abund_raw.bugs = ni_total) |> 
+      rename(act_id = SAMPLEID)
+          
+    
     config <- df |>
       dplyr::mutate(
         Project1 = dplyr::case_when(
@@ -86,7 +92,7 @@ generate_import_template <- function(df, type, save_location){
       dplyr::transmute(
         org_id,
         MLocID,
-        `Index ID` = SAMPLEID,
+        `Index ID` = act_id,
         MMI, 
         SampleStart_Date,
         Project1,

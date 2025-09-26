@@ -11,7 +11,7 @@
 #
 # Front end for running bioassessment score calculations
 #
-# Version 3.0
+# Version 3.1
 #
 # . .... . . ..  . ... ..... . .. . . .   . ..  . .;.. .. . . . .     .  . . . . . .       . .  . ... 
 # .... ...... ... .. .. . ..  . .... . ... .. ...:: . . . .  . . ... . . .  . . . . . .  .  .  . .  . 

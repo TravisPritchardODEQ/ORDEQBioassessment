@@ -18,6 +18,7 @@ Imports:
     AWQMSdata,
     BCGcalc,
     BioMonTools,
+    cli,
     cluster,
     dendextend,
     dplyr,

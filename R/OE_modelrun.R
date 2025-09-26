@@ -27,9 +27,8 @@ OE_run <- function(df_bugs,
   # 
   # #testing
   # # 
-  # # df_bugs <- bug_tax_data_filtered |>
-  # #     filter(act_id == '12997-ORDEQ:20050914:R:SR')
-  # # subsample_seed = 16412730
+  # df_bugs <- bug_tax_data_filtered
+  # subsample_seed = 16412730
   # # # 
   # # 
   # 
@@ -41,8 +40,8 @@ OE_run <- function(df_bugs,
 
   df_rand <-ORDEQBioassessment::random_subsample(df_bugs, OTU_col = OTU_RIV_24, seed = subsample_seed)
   
-  
-  
+
+
   
   #####
   #####
@@ -131,6 +130,11 @@ bugs.mat_raw.bugs <- dm.rare %>%
   # drop samples with incomplete predictors
   
   preds_raw.bugs_mod <- streamcat_mloc_data[complete.cases(streamcat_mloc_data), ]
+  
+  if(nrow(preds_raw.bugs_mod) == 0){
+    
+    stop("All results are missing at least 1 streamcat metric and cannot be evaluated")
+  }
   
   # Export a table of comids with missing streamcats
   errors <- streamcat_mloc_data[!complete.cases(streamcat_mloc_data), ] |> 

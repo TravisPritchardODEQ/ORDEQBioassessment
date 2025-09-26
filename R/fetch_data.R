@@ -11,17 +11,39 @@
 
 
 fetch_bug_data <- function(startdate = NULL,
-                       enddate = NULL){
+                       enddate = NULL,
+                       filter_existing = TRUE){
   
   
   
+
+
   
   ## Download raw bug data from AWQMS --------------------------------------------------------------------------------
   
   
   raw_bugs <- AWQMSdata::AWQMS_Raw_Macros() 
   
+ 
+  # get list of index activity ID's for filtering ---------------------------
   
+  
+  if(filter_existing){
+    cat(cli::col_cyan("Searching for existing data\n"))
+    
+    existing_indexes <- AWQMSdata::AWQMS_Bio_Indexes(Index_Name = c('O/E Ratio',  'MMI'))  
+    
+    existing_indexes_actids <- unique(stringr::str_remove(existing_indexes$Act_id, "\\:[^:]*$"))
+    
+    raw_bugs <- raw_bugs |> 
+      dplyr::filter(!act_id %in% existing_indexes_actids)
+    
+    cat(cli::col_cyan("Found and removed data from existing indexes\n"))
+    
+  }
+  
+  
+   
   ## Join Taxonomy table ---------------------------------------------------------------------------------------------
   
   #AWQMS taxa = Taxonomic_Name

@@ -4,7 +4,7 @@
 \alias{fetch_bug_data}
 \title{fetch_bug_data}
 \usage{
-fetch_bug_data(startdate = NULL, enddate = NULL)
+fetch_bug_data(startdate = NULL, enddate = NULL, filter_existing = TRUE)
 }
 \arguments{
 \item{startdate}{Startdate for datapull}

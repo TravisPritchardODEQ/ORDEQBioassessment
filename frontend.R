@@ -11,7 +11,7 @@
 #
 # Front end for running bioassessment score calculations
 #
-# Version 3.0
+# Version 3.1
 #
 # . .... . . ..  . ... ..... . .. . . .   . ..  . .;.. .. . . . .     .  . . . . . .       . .  . ... 
 # .... ...... ... .. .. . ..  . .... . ... .. ...:: . . . .  . . ... . . .  . . . . . .  .  .  . .  . 
@@ -62,7 +62,7 @@ file_save_locationx <- '//deqlead-lims/SERVERFOLDERS/AWQMS/BioMon/2025 models'
 #### SEE ABOVE
 ##################################
 
-bug_tax_data <- ORDEQBioassessment::fetch_bug_data()
+bug_tax_data <- ORDEQBioassessment::fetch_bug_data(filter_existing = TRUE)
 
 
 bug_tax_data_filtered <- bug_tax_data |>
@@ -161,8 +161,11 @@ MMI_scores <- MMI_results$MMI_result
 
 MMI_metrics <- MMI_results$MMI_metrics
 
-MMI_ni_total <- MMI_metrics |> 
-  select(SAMPLEID, ni_total)
+
+#This section adds the ni_total to the scores and is used for DQL generation
+MMI_ni_total <- OE_scores |> 
+  transmute(SAMPLEID = act_id,
+            ni_total = tot.abund_raw.bugs)
 
 MMI_scores <- MMI_scores |> 
   left_join(MMI_ni_total)

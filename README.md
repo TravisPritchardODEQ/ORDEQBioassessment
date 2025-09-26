@@ -21,7 +21,7 @@ Download the [frontend file](https://github.com/TravisPritchardODEQ/ORDEQBioasse
 
 # To Do
 
--   Add option to limit running the code to only sites that do not yet have calculated metrics
+-   ~~Add option to limit running the code to only sites that do not yet have calculated indexes~~
 
 -   ~~Create AWQMS import files~~
 

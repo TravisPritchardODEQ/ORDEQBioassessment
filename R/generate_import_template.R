@@ -196,7 +196,7 @@ generate_import_template <- function(df, type, save_location){
                                             qualifer == 7 ~ "poor sample quality",
                                             #qualifer == 8 ~ "boatable",
                                             TRUE ~ NA),
-                  DQL = ifelse(qualifer != 0, 'E', ""), 
+                  DQL = ifelse(qualifer != 0, 'E', "A"), 
                   Awqms_qualifer = ifelse(qualifer != 0, 'ALT', "")) %>% 
     dplyr::select(act_id,qualifer,qualifer_text,DQL,Awqms_qualifer)
   

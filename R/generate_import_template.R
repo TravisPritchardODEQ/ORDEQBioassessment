@@ -153,7 +153,16 @@ generate_import_template <- function(df, type, save_location){
                        act_comments,
                        CollectionMethod = Sample_Method,
                        Assemblage,
-                       EquipmentID = 'D-Frame Net'	)
+                       EquipmentID = 'D-Frame Net'	) |> 
+      dplyr::mutate(CollectionMethod = case_when(CollectionMethod == 'Benthic Kick - Mixed habitat' ~ 'Benthic Kick - Mixed',
+                                                 CollectionMethod == 'Benthic Kick - Targeted Pool' ~ 'Benthic Kick - Pool',
+                                                 CollectionMethod == 'Benthic Kick - Targeted Riffle' ~ 'Benthic Kick - Riffle',
+                                                 CollectionMethod == 'Wadeable' ~ 'WADEABLE',
+                                                 CollectionMethod == 'Kaufmann & Robinson 1998; Hayslip, Herger, & Leinenbach 2004' ~ 'Kaufmann 1998; Hayslip 2004',
+                                                 CollectionMethod == 'Kaufmann & Robinson 1998; Herger & Hayslip 2000' ~ 'Kaufmann 1998; Herger 2000',
+                                                 CollectionMethod == 'Peck et al. unpublished; Field manual' ~ 'Peck et al.; Field manual',
+                                                 TRUE ~ CollectionMethod
+                                                 ))
     
     
     

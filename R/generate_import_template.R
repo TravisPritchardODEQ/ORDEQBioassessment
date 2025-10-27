@@ -20,7 +20,7 @@ generate_import_template <- function(df, type, save_location){
   # Testing -----------------------------------------------------------------
   
   
-  # df <- MMI_scores
+  # df <- metrics
   # type <-  'Metrics'
   # save_location <- 'C:/Users/tpritch/OneDrive - Oregon/R Projects/ORDEQBioassessment'
   
@@ -125,8 +125,8 @@ generate_import_template <- function(df, type, save_location){
   if( type == "Metrics")  {
     
     metrics_keep <- ORDEQBioassessment::metric_info |> 
-      dplyr::filter(ODEQ.keep == "Y") |> 
-      dplyr::select(ODEQ.keep, METRIC_NAME)
+        dplyr::transmute(MetricTypeID = ID) |> 
+      dplyr::mutate(ODEQ.keep = 1)
     
     config <- df |>
       dplyr::relocate(org_id,SAMPLEID,Activity_Type,Sample_Media,SampleStart_Date,
@@ -137,7 +137,7 @@ generate_import_template <- function(df, type, save_location){
         values_to = "Activity Metric Score"
       ) |> 
       dplyr::mutate(`Activity Metric Score` = round(`Activity Metric Score`, 3)) |> 
-      dplyr::left_join(metrics_keep, dplyr::join_by(MetricTypeID == METRIC_NAME)) |> 
+      dplyr::left_join(metrics_keep, dplyr::join_by(MetricTypeID)) |> 
       dplyr::filter(!is.na(ODEQ.keep)) |> 
       dplyr::rename(act_id = SAMPLEID) |> 
       dplyr::transmute(org_id,
@@ -196,7 +196,7 @@ generate_import_template <- function(df, type, save_location){
                                             qualifer == 7 ~ "poor sample quality",
                                             #qualifer == 8 ~ "boatable",
                                             TRUE ~ NA),
-                  DQL = ifelse(qualifer != 0, 'E', ""), 
+                  DQL = ifelse(qualifer != 0, 'E', "A"), 
                   Awqms_qualifer = ifelse(qualifer != 0, 'ALT', "")) %>% 
     dplyr::select(act_id,qualifer,qualifer_text,DQL,Awqms_qualifer)
   

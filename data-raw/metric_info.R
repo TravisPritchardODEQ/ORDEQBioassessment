@@ -2,8 +2,7 @@
 # Metrics info ------------------------------------------------------------
 
 
-metric_info <- openxlsx::read.xlsx('data-raw/MetricNames 2.xlsx',
-                                   sheet = 'metadata_ODEQ.keep')
+metric_info <- openxlsx::read.xlsx('data-raw/ORDEQ.mets_FINAL_for.AWQMS.xlsx')
 
 
 usethis::use_data(metric_info,

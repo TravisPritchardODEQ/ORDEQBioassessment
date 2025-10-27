@@ -12,7 +12,8 @@
 
 fetch_bug_data <- function(startdate = NULL,
                        enddate = NULL,
-                       filter_existing = TRUE){
+                       filter_existing_indexes = TRUE,
+                       filter_existing_metrics = TRUE){
   
   
   
@@ -28,8 +29,8 @@ fetch_bug_data <- function(startdate = NULL,
   # get list of index activity ID's for filtering ---------------------------
   
   
-  if(filter_existing){
-    cat(cli::col_cyan("Searching for existing data\n"))
+  if(filter_existing_indexes){
+    cat(cli::col_cyan("Searching for existing indexes\n"))
     
     existing_indexes <- AWQMSdata::AWQMS_Bio_Indexes(Index_Name = c('O/E Ratio',  'MMI'))  
     
@@ -39,6 +40,22 @@ fetch_bug_data <- function(startdate = NULL,
       dplyr::filter(!act_id %in% existing_indexes_actids)
     
     cat(cli::col_cyan("Found and removed data from existing indexes\n"))
+    
+  }
+  
+  
+  if(filter_existing_metrics){
+    cat(cli::col_cyan("Searching for existing metrics\n"))
+    
+    existing_metrics <- AWQMSdata::AWQMS_Bio_Metrics() |> 
+      dplyr::filter(Metric_Name == 'ni_total')
+    
+    existing_indexes_actids <- unique(existing_metrics$act_id)
+    
+    raw_bugs <- raw_bugs |> 
+      dplyr::filter(!act_id %in% existing_indexes_actids)
+    
+    cat(cli::col_cyan("Found and removed data from existing metrics\n"))
     
   }
   

@@ -1,3 +1,7 @@
+# ORDEQBioassessment 1.0.0
+
+-   Update data fetch function to remove either (or both) existing metrics and indexes
+
 # ORDEQBioassessment 0.3.0
 
 -   Updated metrics export function to match identified metrics to load to AWQMS

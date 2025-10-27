@@ -11,7 +11,7 @@
 #
 # Front end for running bioassessment score calculations
 #
-# Version 0.3.0
+# Version 1.0
 #
 # . .... . . ..  . ... ..... . .. . . .   . ..  . .;.. .. . . . .     .  . . . . . .       . .  . ... 
 # .... ...... ... .. .. . ..  . .... . ... .. ...:: . . . .  . . ... . . .  . . . . . .  .  .  . .  . 
@@ -62,7 +62,8 @@ file_save_locationx <- '//deqlead-lims/SERVERFOLDERS/AWQMS/BioMon/2025 models'
 #### SEE ABOVE
 ##################################
 
-bug_tax_data <- ORDEQBioassessment::fetch_bug_data(filter_existing = TRUE)
+bug_tax_data <- ORDEQBioassessment::fetch_bug_data(filter_existing_indexes = TRUE,
+                                                   filter_existing_metrics = TRUE)
 
 
 bug_tax_data_filtered <- bug_tax_data |>

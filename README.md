@@ -17,7 +17,9 @@ devtools::install_github("TravisPritchardODEQ/ORDEQBioassessment",
 
 # Use
 
-Download the [frontend file](https://github.com/TravisPritchardODEQ/ORDEQBioassessment/raw/refs/heads/main/frontend.R "Download the frontend file from github"), and work your way through it. Add data filtering code as needed.
+Use the following code to download the [frontend file](https://github.com/TravisPritchardODEQ/ORDEQBioassessment/raw/refs/heads/main/frontend.R "Download the frontend file from github"), and work your way through it. Add data filtering code as needed.
+
+`ORDEQBioassessment::download_bioassessment_frontend()`
 
 # To Do
 

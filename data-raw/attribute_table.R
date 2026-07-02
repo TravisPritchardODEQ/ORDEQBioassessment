@@ -22,7 +22,7 @@ rstudioapi::showDialog(title = "WHERE ARE YOU GETTING THE ATTRIBUTE TABLE???", m
 #You good with me pulling it out into Excel, making changes, then submitting back to you?
 
 
-attribute_table <- read.xlsx("data-raw/attributes_SLH edits_7.2.26.xlsx") |> 
+attribute_table <- read.xlsx("data-raw/Copy of attributes_SLH edits_7.2.26 1.xlsx") |> 
   #mutate(across(everything(), as.character)) %>%
   mutate(across(everything(), ~coalesce(.x, "")))
 
